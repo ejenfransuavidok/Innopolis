@@ -15,7 +15,7 @@ public class FileGen {
 
         for(int i=0; i<10000; i++) {
             String s = rs.nextString();
-            try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("test-" + i + ".txt"), charset)) {
+            try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("test/test-" + i + ".txt"), charset)) {
                 writer.write(s, 0, s.length());
             } catch (IOException x) {
                 System.err.format("IOException: %s%n", x);

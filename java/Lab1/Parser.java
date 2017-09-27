@@ -18,7 +18,7 @@ public class Parser extends Thread {
     final Boolean isFile;
     final File file;
 
-    Parser(String resource){
+    public Parser(String resource){
         fname = resource;
         file = new File(fname);
         if(exist = file.exists()){
@@ -71,7 +71,7 @@ public class Parser extends Thread {
             } else {
                 resultMap.put(key, newValue);
             }
-            System.out.println("key[" + key + "] -> [" + newValue + "]");
+            //System.out.println("key[" + key + "] -> [" + newValue + "]");
         }
     }
 

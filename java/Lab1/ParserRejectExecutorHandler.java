@@ -8,7 +8,7 @@ public class ParserRejectExecutorHandler extends Parser {
 
     public static ThreadPoolExecutor executorService;
 
-    ParserRejectExecutorHandler(String string){
+    public ParserRejectExecutorHandler(String string){
         super(string);
     }
 
@@ -26,7 +26,7 @@ public class ParserRejectExecutorHandler extends Parser {
             } else {
                 resultMap.put(key, newValue);
             }
-            System.out.println("key[" + key + "] -> [" + newValue + "]");
+            //System.out.println("key[" + key + "] -> [" + newValue + "]");
         }
         finally {
             lock.unlock();
