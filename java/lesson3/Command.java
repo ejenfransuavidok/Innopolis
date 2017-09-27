@@ -1,0 +1,6 @@
+package lesson3;
+
+public enum Command
+{
+    READ, WRITE, APPEND, EXIT, WORKING, PARSE, SERIALIZE, DESERIALIZE, UNDEFINED
+}
