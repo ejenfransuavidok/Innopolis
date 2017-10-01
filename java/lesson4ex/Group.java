@@ -10,10 +10,15 @@ public class Group implements Serializable {
     private final String groupName;
     private Set<Student> students;
 
+    public Group(){
+        groupNum    = 0;
+        groupName   = "";
+    }
+
     public Group(int groupNum, String groupName){
-        this.groupNum = groupNum;
-        this.groupName = groupName;
-        this.students = new HashSet<>();
+        this.groupNum   = groupNum;
+        this.groupName  = groupName;
+        this.students   = new HashSet<>();
     }
 
     public Group(Group group){

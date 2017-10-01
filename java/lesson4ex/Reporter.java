@@ -15,7 +15,7 @@ public class Reporter {
     private ArrayList<PresentStudent> reportByGroup;
     private ArrayList<PresentStudent> reportByLesson;
 
-    public Reporter(ArrayList<PresentStudent> presentStudents){
+    public Reporter(ArrayList<PresentStudent> presentStudents) throws Exception {
         this.presentStudents = presentStudents;
         /**
          * @ создаем 3 отчета по первому студенту, по первой группе, по первому уроку

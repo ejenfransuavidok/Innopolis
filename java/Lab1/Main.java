@@ -21,7 +21,7 @@ public class Main {
         */
         String [] Args = new String [1000];
         for(int i=0; i<1000; i++){
-            Args [i] = new String("test/test-" + i + ".txt");
+            Args [i] = new String("../../test/test-" + i + ".txt");
         }
         Class<?> [] clazzes = {Class.forName("Lab1.Parser"), Class.forName("Lab1.ParserRejectExecutorHandler")};
         for(Class<?> clazz : clazzes) {

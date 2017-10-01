@@ -21,13 +21,20 @@ public class Lesson implements Serializable {
      */
     private HashSet<Student> presented;
 
+    public Lesson(){
+        dateTime    = 0;
+        topic       = "";
+        roomNum     = 0;
+        teacher     = "";
+    }
+
     public Lesson(long dateTime, String topic, short roomNum, String teacher, Group group){
-        this.dateTime = dateTime;
-        this.topic = topic;
-        this.roomNum = roomNum;
-        this.teacher = teacher;
-        this.group = group;
-        this.presented = new HashSet<>();
+        this.dateTime   = dateTime;
+        this.topic      = topic;
+        this.roomNum    = roomNum;
+        this.teacher    = teacher;
+        this.group      = group;
+        this.presented  = new HashSet<>();
     }
 
     @Override

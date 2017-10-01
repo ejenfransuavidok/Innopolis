@@ -29,7 +29,7 @@ public class Journal implements Serializable {
         return this.presentStudents;
     }
 
-    public static ArrayList<PresentStudent> deSerializeCollection(String fname){
+    protected static ArrayList<PresentStudent> deSerializeCollection(String fname) throws Exception {
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fname)))
         {
             return (ArrayList<PresentStudent>)ois.readObject();
@@ -40,7 +40,7 @@ public class Journal implements Serializable {
         return null;
     }
 
-    public static void serializePresentStudents(String fname, ArrayList<PresentStudent> presentStudents){
+    protected static void serializePresentStudents(String fname, ArrayList<PresentStudent> presentStudents) throws Exception {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fname)))
         {
             if(presentStudents.size() != 0){

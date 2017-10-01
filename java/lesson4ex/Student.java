@@ -16,6 +16,10 @@ public class Student implements Serializable {
     private boolean present;
     private final long bdate;
 
+    public Student(){
+        bdate = 0;
+    }
+
     public Student(short num, String fName, String sName,
                    String familyName, long bdate) {
         this.num = num;

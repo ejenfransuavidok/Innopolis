@@ -18,61 +18,22 @@ import static java.lang.System.setOut;
 public class Main {
 
     private static final String PRESENT_STUDENTS_DAT = "presentStudents.dat";
+    private static final String PRESENT_STUDENTS_XML = "presentStudents.xml";
 
-    public static ArrayList<String> getGenericName(Field field){
-        ArrayList<String> result = new ArrayList<String>();
-        Type genericFieldType = field.getGenericType();
-        if(genericFieldType instanceof ParameterizedType){
-            ParameterizedType aType = (ParameterizedType) genericFieldType;
-            Type[] fieldArgTypes = aType.getActualTypeArguments();
-            for(Type fieldArgType : fieldArgTypes){
-                Class fieldArgClass = (Class) fieldArgType;
-                result.add(new String(fieldArgClass.toString()));
-            }
-        }
-        return result;
-    }
+    public static void main(String[] args) throws Exception {
 
-    public static void printClass(Class<?> cls, String tab){
-        for(Field f: cls.getDeclaredFields()){
-            System.out.println(tab + "VARIAB: " + f.getName() + " " + f.getType().getName() + " " + f.getModifiers());
-            for(String genericName : getGenericName(f)) {
-                System.out.println(tab + "GENERIC: " + genericName);
-            }
-            printClass(f.getType(), tab + "\t");
-        }
-        for(Method m: cls.getDeclaredMethods()){
-            System.out.print(tab + "METHOD: " + m.getName() + " " + m.getReturnType().getName() + "(");
-            for(Parameter p: m.getParameters()){
-                System.out.print(tab + p.getName() + ", " + p.getType().getName());
-            }
-            System.out.println(");");
-        }
-    }
-
-    public static void main(String[] args) {
-        /**
-         * Рефлексия
-         */
-        printClass(Journal.class, "");
-        exit(0);
-        /**
-         * Рефлексия конец!
-         */
-        File file = new File("presentStudents.dat");
+        File file = new File(PRESENT_STUDENTS_XML);
         if(!file.exists()) {
             Init init = new Init();
-            Journal journal = new Journal(init.getLessons());
-            Journal.serializePresentStudents(PRESENT_STUDENTS_DAT, journal.getPresentStudents());
+            JournalXML journal = new JournalXML(init.getLessons());
+            JournalXML.serializePresentStudents(PRESENT_STUDENTS_XML, journal.getPresentStudents());
         }
         else{
-            System.out.println("File " + PRESENT_STUDENTS_DAT + " exist!");
-            /**
-             * @ создаем 3 отчета по первому студенту, по первой группе, по первому уроку
-             */
-            ArrayList<PresentStudent> presentStudents = Journal.deSerializeCollection(PRESENT_STUDENTS_DAT);
-            Reporter reporter = new Reporter(presentStudents);
-            System.out.println("journal_student.dat, journal_group.dat, journal_lesson.dat done!");
+            System.out.println("File " + PRESENT_STUDENTS_XML + " exist!, deserializing...");
+            ArrayList<PresentStudent> presentStudents = JournalXML.deSerializeCollection(PRESENT_STUDENTS_XML);
+//            ArrayList<PresentStudent> presentStudents = Journal.deSerializeCollection(PRESENT_STUDENTS_DAT);
+//            Reporter reporter = new Reporter(presentStudents);
+//            System.out.println("journal_student.dat, journal_group.dat, journal_lesson.dat done!");
         }
         System.out.println("END");
     }
