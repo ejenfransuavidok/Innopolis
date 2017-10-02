@@ -15,6 +15,7 @@ public class OnlyServer {
             try {
                 consumer = new ServerSocket(4444);
                 socket = consumer.accept();
+                System.out.println("socket accepted...");
                 inputStream = socket.getInputStream();
                 outputStream = socket.getOutputStream();
             } catch (IOException e) {
@@ -22,19 +23,27 @@ public class OnlyServer {
             }
             DataInputStream dis = new DataInputStream(inputStream);
             DataOutputStream dos = new DataOutputStream(outputStream);
+            Scanner scanner = new Scanner(System.in);
+            InputStreamReader isr = new InputStreamReader(System.in);
+            BufferedReader br = new BufferedReader(isr);
             String message = null;
             while(true){
-                Scanner scanner = new Scanner(System.in);
                 try {
                     if(dis.available() > 0) {
                         message = dis.readUTF();
                         System.out.println(message);
                     }
-                    else if(scanner.hasNext()) {
+                    else if(br.ready()) {
+                        message = br.readLine();
                         dos.writeUTF(message);
                         dos.flush();
                     }
                 } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }

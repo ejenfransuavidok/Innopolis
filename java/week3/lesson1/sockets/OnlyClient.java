@@ -2,7 +2,6 @@ package week3.lesson1.sockets;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class OnlyClient {
 
@@ -31,19 +30,26 @@ public class OnlyClient {
                     }
                 }
             }
+            InputStreamReader isr = new InputStreamReader(System.in);
+            BufferedReader br = new BufferedReader(isr);
+            String message = null;
             while(true){
-                Scanner scanner = new Scanner(System.in);
-                String message = null;
                 try {
                     if(dis.available() > 0) {
                         message = dis.readUTF();
                         System.out.println(message);
                     }
-                    else if(scanner.hasNext()) {
+                    else if(br.ready()) {
+                        message = br.readLine();
                         dos.writeUTF(message);
                         dos.flush();
                     }
                 } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
