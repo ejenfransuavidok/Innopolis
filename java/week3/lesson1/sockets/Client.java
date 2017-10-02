@@ -40,12 +40,21 @@ public class Client {
             Socket clientSocket = null;
             OutputStream outputStream = null;
             DataOutputStream dos = null;
-            try {
-                clientSocket = new Socket("127.0.0.1", 4444);
-                outputStream = clientSocket.getOutputStream();
-                dos = new DataOutputStream(outputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
+            while(true) {
+                try {
+                    clientSocket = new Socket("10.243.1.47", 4444);
+                    outputStream = clientSocket.getOutputStream();
+                    dos = new DataOutputStream(outputStream);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("socket refused...");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
             }
             while(true){
                 Scanner scanner = new Scanner(System.in);
