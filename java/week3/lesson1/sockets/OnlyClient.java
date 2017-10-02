@@ -14,18 +14,21 @@ public class OnlyClient {
             DataOutputStream dos = null;
             InputStream inputStream;
             DataInputStream dis = null;
-            try {
-                clientSocket = new Socket("10.243.1.47", 4444);
-                outputStream = clientSocket.getOutputStream();
-                dos = new DataOutputStream(outputStream);
-                inputStream = clientSocket.getInputStream();
-                dis = new DataInputStream(inputStream);
-            } catch (IOException e) {
-                System.out.println("socket refused...");
+            while(true) {
                 try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
+                    clientSocket = new Socket("127.0.0.1", 4444);
+                    outputStream = clientSocket.getOutputStream();
+                    dos = new DataOutputStream(outputStream);
+                    inputStream = clientSocket.getInputStream();
+                    dis = new DataInputStream(inputStream);
+                    break;
+                } catch (IOException e) {
+                    System.out.println("socket refused...");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
             while(true){
