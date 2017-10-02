@@ -1,4 +1,4 @@
 package libraryportal.repository;
 
-public class ActorsRepository extends RepositoryCommon {
+public class ActorsRepository {//extends RepositoryCommon {
 }
