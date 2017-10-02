@@ -13,7 +13,7 @@ public class ClientServer {
         System.out.println("Which room do you want (port number) ?");
         Integer port = Integer.valueOf(scanner.next());
 
-        Thread tClient = new Thread(){
+        Thread tServer = new Thread(){
             public void run() {
                 ServerSocket consumer = null;
                 Socket socket = null;
@@ -48,9 +48,9 @@ public class ClientServer {
             }
         };
 
-        tClient.start();
+        tServer.start();
 
-        Thread tServer = new Thread(){
+        Thread tClient = new Thread(){
             public void run(){
                 Socket socket = null;
                 try {
@@ -82,7 +82,7 @@ public class ClientServer {
                 }
             }
         };
-        tServer.start();
+        tClient.start();
     }
 
 }
