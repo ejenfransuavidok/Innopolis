@@ -1,4 +1,4 @@
-package libraryportal.repository;
+package libraryportal.model;
 
 import libraryportal.controller.Request;
 

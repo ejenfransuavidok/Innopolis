@@ -1,10 +1,10 @@
-package libraryportal.repository;
+package libraryportal.model;
 
 import libraryportal.controller.Request;
 
 import java.util.List;
 
-public class RepositoryCommon implements Repository {
+public class ActorsRepository implements Repository {
     @Override
     public List findEntities(Request request) {
         return null;
