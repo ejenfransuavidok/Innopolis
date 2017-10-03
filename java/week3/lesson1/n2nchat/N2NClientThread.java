@@ -23,21 +23,35 @@ public class N2NClientThread extends Thread {
             OutputStream outputStream = socket.getOutputStream();
             DataOutputStream dos = new DataOutputStream(outputStream);
             while(true){
+                //System.out.println("pred synchronized : " + this.getId());
                 synchronized (message) {
+                    //System.out.println("in up synchronized : " + this.getId());
                     if(message.getHaveNewMessage() != 0){
                         Integer tmp = message.getHaveNewMessage() - 1;
                         message.setHaveNewMessage(tmp);
-                        dos.writeUTF(message.getMessage());
-                        dos.flush();
+                        /**
+                         * сами себе не отправляем
+                         */
+                        if(message.getId() != this.getId()) {
+                            System.out.println(">>>> : " + this.getId());
+                            dos.writeUTF(message.getMessage());
+                            dos.flush();
+                        }
                     }
                     else if (dis.available() > 0) {
                         String msg = dis.readUTF();
                         message.setMessage(msg);
                         message.setHaveNewMessage(clientsCounter);
+                        message.setId(this.getId());
                     }
+                    //System.out.println("in down synchronized : " + this.getId());
+                    message.wait(100);
                 }
+                //System.out.println("after synchronized : " + this.getId());
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

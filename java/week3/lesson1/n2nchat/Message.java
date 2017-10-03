@@ -4,10 +4,20 @@ public class Message {
 
     private String message;
     private Integer haveNewMessage;
+    private long Id;
 
     Message(){
         message = "";
         haveNewMessage = 0;
+        Id = -1;
+    }
+
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long id) {
+        Id = id;
     }
 
     public String getMessage() {

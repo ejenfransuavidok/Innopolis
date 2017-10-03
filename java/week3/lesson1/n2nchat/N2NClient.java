@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class N2NClient {
     public static void main(String[] args) throws IOException {
         Socket clientSocket = new Socket("127.0.0.1", 4444);
-
         OutputStream outputStream = clientSocket.getOutputStream();
         DataOutputStream dos = new DataOutputStream(outputStream);
         InputStream inputStream = clientSocket.getInputStream();
